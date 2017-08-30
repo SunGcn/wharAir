@@ -17,8 +17,12 @@ public let SCREENHEIGHT = UIScreen.self().bounds.height // 屏幕高度
 public let USERNAME:String = "孙港"
 
 //Variable
-public var selfLatitude_Double:Double! //当前维度
-public var selfLongitude_Double:Double! //当前经度
+public var selfLatitude_Double:Double = 0 //当前维度 角度
+public var selfLongitude_Double:Double = 0 //当前经度 角度
+public var selfXRotation_Double:Double = 0 //0-1
+public var selfYRotation_Double:Double = 0 //0-1
+public var selfZRotation_Double:Double = 0 //0-1
+public var selfDirection_Double:Double = 0 //0-360 角度
 
 //Function
 public func getHorizonalDistance(selfLocation:CLLocation, messageLocation:CLLocation)->Double{
@@ -40,6 +44,70 @@ public func getVerticalDistance(selfLocation:CLLocation, messageLocation:CLLocat
     }
     else{
         return -distance
+    }
+}
+
+/*
+ *function: stroeMessage
+ *author: sungang
+ *date: 2017/08/31
+ */
+public func storeMessage(messageContent:String){
+    let app = UIApplication.shared.delegate as! AppDelegate
+    let context = app.persistentContainer.viewContext
+    
+    //创建User对象
+    let user = NSEntityDescription.insertNewObject(forEntityName: "Message",
+                                                   into: context) as! Message
+    
+    //对象赋值
+    user.name = USERNAME
+    user.content = messageContent
+    user.latitude = selfLatitude_Double
+    user.longitude = selfLongitude_Double
+    
+    //保存
+    do {
+        try context.save()
+        print("保存成功！")
+    } catch {
+        fatalError("不能保存：\(error)")
+    }
+
+}
+
+/*
+ *function: searchMessage
+ *author: sungang
+ *date: 2017/08/31
+ */
+public func searchMessage(){
+    let app = UIApplication.shared.delegate as! AppDelegate
+    let context = app.persistentContainer.viewContext
+    
+    //声明数据的请求
+    let fetchRequest = NSFetchRequest<Message>(entityName:"Message")
+    //fetchRequest.fetchLimit = 10 //限定查询结果的数量
+    //fetchRequest.fetchOffset = 0 //查询的偏移量
+    
+    //设置查询条件
+    //let predicate = NSPredicate(format: "id= '1' ", "")
+    //fetchRequest.predicate = predicate
+    
+    //查询操作
+    do {
+        let fetchedObjects = try context.fetch(fetchRequest)
+        
+        //遍历查询的结果
+        for info in fetchedObjects{
+            print("name=\(String(describing: info.name))")
+            print("content=\(String(describing: info.content))")
+            print("latitude=\(info.latitude)")
+            print("longitude=\(info.longitude)")
+        }
+    }
+    catch {
+        fatalError("不能保存：\(error)")
     }
 }
 /*public func getViewContext () -> NSManagedObjectContext {

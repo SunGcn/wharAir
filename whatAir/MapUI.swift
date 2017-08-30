@@ -259,9 +259,9 @@ class MapUI: UIViewController, MAMapViewDelegate{
     // 将要改变
     func keyboardWillChange(_ notification:Notification){
         let contentSize = self.textView.contentSize
-        print(contentSize.height)
+        //print(contentSize.height)
         if contentSize.height > 140{
-            print(contentSize.height)
+            //print(contentSize.height)
             return;
         }
         var selfframe = self.view.frame
@@ -290,6 +290,8 @@ class MapUI: UIViewController, MAMapViewDelegate{
     }
     
     func sendAction(){
+        //self.keyboardWillHid(<#T##notification: Notification##Notification#>)
+        storeMessage(messageContent: self.textView.text)
         if (isShowing){
             if self.textView.text.characters.count == 0 {
                 print("评论为空")

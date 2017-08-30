@@ -6,14 +6,49 @@
 //  Copyright © 2017年 孙港. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
+import CoreLocation
+import CoreMotion
+import CoreData
 
-class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate {
+class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManagerDelegate{
     var imageView: UIImageView!
     
     var captureSesssion: AVCaptureSession!
     var stillImageOutput: AVCapturePhotoOutput!
+
+    
+    
+    
+    
+    
+    let locationManager = CLLocationManager()
+    let geocoder = CLGeocoder()
+    let locationLabel = UILabel()
+    let locationStrLabel = UILabel()
+    let locationAltitude = UILabel()
+    
+    var altitude:Double = 0
+    var latitude:Double = 0
+    var longitude:Double = 0
+    var locationName:String = ""
+    
+    //运动管理器
+    let motionManager = CMMotionManager()
+    
+    let labelX = UILabel()
+    let labelY = UILabel()
+    let labelZ = UILabel()
+    
+    var x:Double = 0.0
+    var y:Double = 0.0
+    var z:Double = 0.0
+    var heading:Double = 0.0
+
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +101,171 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate {
         catch {
             print(error)
         }
+        
+        
+        
+        
+        
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 1
+        locationManager.requestAlwaysAuthorization()
+        
+        
+        locationLabel.frame = CGRect(x: 0, y: 50, width: self.view.bounds.width, height: 100)
+        locationLabel.textAlignment = .center
+        locationLabel.textColor = UIColor.white
+        self.view.addSubview(locationLabel)
+        
+        locationAltitude.frame = CGRect(x: 0, y: 100, width: self.view.bounds.width, height: 100)
+        locationAltitude.textAlignment = .center
+        locationAltitude.textColor = UIColor.white
+        self.view.addSubview(locationAltitude)
+        
+        locationStrLabel.frame = CGRect(x: 0, y: 150, width: self.view.bounds.width, height: 50)
+        locationStrLabel.textAlignment = .center
+        locationStrLabel.textColor = UIColor.white
+        self.view.addSubview(locationStrLabel)
+        
+        let findMyLocationBtn = UIButton(type: .custom)
+        findMyLocationBtn.frame = CGRect(x: 50, y: self.view.bounds.height - 80, width: self.view.bounds.width - 100, height: 50)
+        findMyLocationBtn.setTitle("Find My Position", for: UIControlState.normal)
+        findMyLocationBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
+        findMyLocationBtn.addTarget(self, action: #selector(findMyLocation), for: UIControlEvents.touchUpInside)
+        self.view.addSubview(findMyLocationBtn)
+        
+        
+        labelX.frame = CGRect(x: 0, y: 200, width: self.view.bounds.width, height: 50)
+        labelX.textAlignment = .center
+        labelX.textColor = UIColor.white
+        self.view.addSubview(labelX)
+        labelY.frame = CGRect(x: 0, y: 220, width: self.view.bounds.width, height: 50)
+        labelY.textAlignment = .center
+        labelY.textColor = UIColor.white
+        self.view.addSubview(labelY)
+        labelZ.frame = CGRect(x: 0, y: 240, width: self.view.bounds.width, height: 50)
+        labelZ.textAlignment = .center
+        labelZ.textColor = UIColor.white
+        self.view.addSubview(labelZ)
+        
+        
+        
+        locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
+        
+        
+        getRotationValues()
+        
+        
+        storeMessage(messageContent: "hello world")
+        searchMessage()
+        
+
+        
+        
+        
+        
+        
     }
+    
+    
+    
+    
+    func findMyLocation() {
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 1
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        heading = newHeading.trueHeading
+        selfDirection_Double = heading
+        let altitudeStr = "\(heading)  "
+        locationAltitude.text = altitudeStr
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locations : NSArray = locations as NSArray
+        let currentLocation = locations.lastObject as! CLLocation
+        let locationStr = "\(currentLocation.coordinate.latitude) \(currentLocation.coordinate.longitude)"
+        //let altitudeStr = "\(currentLocation.altitude)  "
+        
+        locationLabel.text = locationStr
+        
+        selfLatitude_Double = currentLocation.coordinate.latitude
+        selfLongitude_Double = currentLocation.coordinate.longitude
+        
+        //locationAltitude.text = altitudeStr
+        //reverseGeocode(location:currentLocation)
+        //locationManager.stopUpdatingLocation()
+    }
+    
+    //将经纬度转换为城市名
+    func reverseGeocode(location:CLLocation) {
+        geocoder.reverseGeocodeLocation(location) { (placeMark, error) in
+            if(error == nil) {
+                let tempArray = placeMark! as NSArray
+                let mark = tempArray.firstObject as! CLPlacemark
+                //                now begins the reverse geocode
+                let addressDictionary = mark.addressDictionary! as NSDictionary
+                let country = addressDictionary.value(forKey: "Country") as! String
+                let city = addressDictionary.object(forKey: "City") as! String
+                let street = addressDictionary.object(forKey: "Street") as! String
+                
+                let finalAddress = "\(street),\(city),\(country)"
+                self.locationStrLabel.text = finalAddress
+                
+            }
+        }
+    }
+    
+    // 开始获取手机姿态信息
+    func getRotationValues() {
+        //Swift
+        if motionManager.isAccelerometerAvailable {
+            self.motionManager.accelerometerUpdateInterval = 0.1
+            let queue = OperationQueue.current
+            self.motionManager.startAccelerometerUpdates(to: queue!, withHandler: {
+                (accelerometerData, error) in
+                guard error == nil else {
+                    print(error!)
+                    return
+                }
+                if self.motionManager.isAccelerometerAvailable{
+                    if let rotationValue = accelerometerData?.acceleration {
+                        self.x = rotationValue.x
+                        self.y = rotationValue.y
+                        self.z = rotationValue.z
+                        
+                        selfXRotation_Double = self.x
+                        selfYRotation_Double = self.y
+                        selfZRotation_Double = self.z
+                        
+                        var textX = "X: "
+                        textX += String(format: "%.4f", rotationValue.x)
+                        self.labelX.text = textX
+                        var textY = "Y: "
+                        textY += String(format: "%.4f", rotationValue.y)
+                        self.labelY.text = textY
+                        var textZ = "Z: "
+                        textZ += String(format: "%.4f", rotationValue.x)
+                        self.labelZ.text = textZ
+                        //print(self.heading)
+                    }
+                }
+            })
+        }
+    }
+    
+
+    
+    
+    
+    
+    
     
     //    MARK: - Button Action
     func takePhoto(_ sender: Any){
