@@ -87,8 +87,8 @@ public func searchMessage(){
     
     //声明数据的请求
     let fetchRequest = NSFetchRequest<Message>(entityName:"Message")
-    //fetchRequest.fetchLimit = 10 //限定查询结果的数量
-    //fetchRequest.fetchOffset = 0 //查询的偏移量
+    //fetchRequest.fetchLimit = 10 // 限定查询结果的数量
+    //fetchRequest.fetchOffset = 0 // 查询的偏移量
     
     //设置查询条件
     //let predicate = NSPredicate(format: "id= '1' ", "")

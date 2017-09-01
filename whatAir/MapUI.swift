@@ -32,6 +32,7 @@ protocol MapUIDelegate{
     func sendAction(_ text:String)
 }
 
+// 高德地图key
 let APIKey1 = "8a6509c1ec94d0b7c3791bed23db2f0e"
 
 class MapUI: UIViewController, MAMapViewDelegate{
