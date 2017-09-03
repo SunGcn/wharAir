@@ -158,6 +158,35 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
         //searchMessage()
 
         
+        let app = UIApplication.shared.delegate as! AppDelegate
+        let context = app.persistentContainer.viewContext
+        //声明数据的请求
+        let fetchRequest = NSFetchRequest<Message>(entityName:"Message")
+        //查询操作
+        do {
+            let fetchedObjects = try context.fetch(fetchRequest)
+            
+            //遍历查询的结果
+            for info in fetchedObjects{
+                if(getDistance(selfLocation: CLLocation(latitude: selfLatitude_Double, longitude: selfLongitude_Double),
+                               messageLocation: CLLocation(latitude: info.latitude, longitude: info.longitude))<300){
+                    
+                }
+                
+                //print("name=\(String(describing: info.name))")
+                //print("content=\(String(describing: info.content))")
+                //print("latitude=\(info.latitude)")
+                //print("longitude=\(info.longitude)")
+                
+                
+            }
+        }
+        catch {
+            fatalError("不能保存：\(error)")
+        }
+
+        
+        
     }
     
     
@@ -174,8 +203,8 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         heading = newHeading.trueHeading
         selfDirection_Double = heading
-        let altitudeStr = "\(heading)  "
-        locationAltitude.text = altitudeStr
+        let directionStr = "\(heading)  "
+        locationAltitude.text = directionStr
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

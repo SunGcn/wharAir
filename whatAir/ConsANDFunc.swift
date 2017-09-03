@@ -52,6 +52,10 @@ public func getVerticalDistance(selfLocation:CLLocation, messageLocation:CLLocat
         return -distance
     }
 }
+public func getDistance(selfLocation:CLLocation, messageLocation:CLLocation)->Double{
+    let distance:CLLocationDistance = selfLocation.distance(from: messageLocation)
+    return distance
+}
 
 /*
  *function: stroeMessage
