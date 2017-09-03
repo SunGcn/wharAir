@@ -20,9 +20,6 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
 
     
     
-    
-    
-    
     let locationManager = CLLocationManager()
     let geocoder = CLGeocoder()
     let locationLabel = UILabel()
@@ -150,7 +147,6 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
         self.view.addSubview(labelZ)
         
         
-        
         locationManager.startUpdatingLocation()
         locationManager.startUpdatingHeading()
         
@@ -158,14 +154,9 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
         getRotationValues()
         
         
-        storeMessage(messageContent: "hello world")
-        searchMessage()
-        
+        //storeMessage(messageContent: "hello world")
+        //searchMessage()
 
-        
-        
-        
-        
         
     }
     
@@ -261,11 +252,6 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
     }
     
 
-    
-    
-    
-    
-    
     
     //    MARK: - Button Action
     func takePhoto(_ sender: Any){

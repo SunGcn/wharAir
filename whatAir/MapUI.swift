@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
@@ -167,11 +168,38 @@ class MapUI: UIViewController, MAMapViewDelegate{
         mapView!.userTrackingMode = MAUserTrackingMode.follow
         
         
-        let pointAnnotation = MAPointAnnotation()
+        
+        let app = UIApplication.shared.delegate as! AppDelegate
+        let context = app.persistentContainer.viewContext
+        //声明数据的请求
+        let fetchRequest = NSFetchRequest<Message>(entityName:"Message")
+        //查询操作
+        do {
+            let fetchedObjects = try context.fetch(fetchRequest)
+            
+            //遍历查询的结果
+            for info in fetchedObjects{
+                print("name=\(String(describing: info.name))")
+                print("content=\(String(describing: info.content))")
+                print("latitude=\(info.latitude)")
+                print("longitude=\(info.longitude)")
+                
+                let pointAnnotation = MAPointAnnotation()
+                pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: info.latitude, longitude: info.longitude)
+                pointAnnotation.title = info.name
+                pointAnnotation.subtitle = info.content
+                mapView!.addAnnotation(pointAnnotation)
+            }
+        }
+        catch {
+            fatalError("不能保存：\(error)")
+        }
+   
+        /*let pointAnnotation = MAPointAnnotation()
         pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: 30.536353, longitude: 114.359372)
         pointAnnotation.title = "sdfs"
         pointAnnotation.subtitle = "sssssssssss"
-        mapView!.addAnnotation(pointAnnotation)
+        mapView!.addAnnotation(pointAnnotation)*/
 
         
 
@@ -290,6 +318,7 @@ class MapUI: UIViewController, MAMapViewDelegate{
         //        //self.backgroundView.frame = CGRect(x: 10, y: self.view.frame.height - 40, width: textViewW+2, height: selfHeight-18);
     }
     
+    // click button to storage a message
     func sendAction(){
         //self.keyboardWillHid(<#T##notification: Notification##Notification#>)
         storeMessage(messageContent: self.textView.text)

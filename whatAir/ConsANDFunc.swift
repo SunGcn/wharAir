@@ -17,6 +17,9 @@ public let SCREENWIDTH = UIScreen.self().bounds.width //屏幕宽度
 public let SCREENHEIGHT = UIScreen.self().bounds.height //屏幕高度
 public let VFOV = 61 * PI / 180.0 //垂直视角 弧度
 public let HFOV = 47.6 * PI / 180.0 //水平视角 弧度
+public let NOVP = 3264
+public let NOHP = 2448
+public let NOFLP = 2768
 public let USERNAME:String = "孙港"
 
 //Variable

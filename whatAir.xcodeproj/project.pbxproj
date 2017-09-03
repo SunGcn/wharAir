@@ -119,17 +119,17 @@
 		3C26C7A31F2DD4C500234EFD /* whatAir */ = {
 			isa = PBXGroup;
 			children = (
-				3CB6AAB61F571E8C000091D8 /* whatAir.xcdatamodeld */,
+				3C26C7B31F2DD4C500234EFD /* Info.plist */,
 				3CCCA6221F49D87A00C876B7 /* AMap.swift */,
 				3C26C7A41F2DD4C500234EFD /* AppDelegate.swift */,
-				3C26C7AE1F2DD4C500234EFD /* Assets.xcassets */,
 				3C0DEDCB1F2DDAA0009C0B58 /* CameraUI.swift */,
 				3C4F536E1F51470300931E08 /* ConsANDFunc.swift */,
-				3C26C7B31F2DD4C500234EFD /* Info.plist */,
-				3C26C7B01F2DD4C500234EFD /* LaunchScreen.storyboard */,
-				3C26C7A81F2DD4C500234EFD /* Main.storyboard */,
 				3C0DEDCD1F2DDAB1009C0B58 /* MapUI.swift */,
 				3C26C7A61F2DD4C500234EFD /* ViewController.swift */,
+				3C26C7AE1F2DD4C500234EFD /* Assets.xcassets */,
+				3C26C7B01F2DD4C500234EFD /* LaunchScreen.storyboard */,
+				3C26C7A81F2DD4C500234EFD /* Main.storyboard */,
+				3CB6AAB61F571E8C000091D8 /* whatAir.xcdatamodeld */,
 			);
 			path = whatAir;
 			sourceTree = "<group>";
