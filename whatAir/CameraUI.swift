@@ -49,6 +49,7 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         captureSesssion = AVCaptureSession()
         captureSesssion.sessionPreset = AVCaptureSessionPresetPhoto
         
@@ -98,11 +99,7 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
         catch {
             print(error)
         }
-        
-        
-        
-        
-        
+
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -146,50 +143,33 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
         labelZ.textColor = UIColor.white
         self.view.addSubview(labelZ)
         
-        
-        locationManager.startUpdatingLocation()
-        locationManager.startUpdatingHeading()
-        
-        
-        getRotationValues()
-        
-        
-        //storeMessage(messageContent: "hello world")
-        //searchMessage()
-
-        
         let app = UIApplication.shared.delegate as! AppDelegate
         let context = app.persistentContainer.viewContext
-        //声明数据的请求
         let fetchRequest = NSFetchRequest<Message>(entityName:"Message")
-        //查询操作
         do {
             let fetchedObjects = try context.fetch(fetchRequest)
-            
-            //遍历查询的结果
             for info in fetchedObjects{
+                //var i:Int!
+                //i = 0
                 if(getDistance(selfLocation: CLLocation(latitude: selfLatitude_Double, longitude: selfLongitude_Double),
-                               messageLocation: CLLocation(latitude: info.latitude, longitude: info.longitude))<300){
-                    
+                               messageLocation: CLLocation(latitude: info.latitude, longitude: info.longitude)) < MAXLENGTHSCAN){
+                    //messagesArrayX[i] = getHorizonalDistance(selfLocation: CLLocation(latitude: selfLatitude_Double, longitude: selfLongitude_Double),
+                    //                                         messageLocation: CLLocation(latitude: info.latitude, longitude: info.longitude))
+                    //messagesArrayY[i] = getVerticalDistance(selfLocation: CLLocation(latitude: selfLatitude_Double, longitude: selfLongitude_Double),
+                    //                                        messageLocation: CLLocation(latitude: info.latitude, longitude: info.longitude))
                 }
-                
-                //print("name=\(String(describing: info.name))")
-                //print("content=\(String(describing: info.content))")
-                //print("latitude=\(info.latitude)")
-                //print("longitude=\(info.longitude)")
-                
-                
             }
         }
         catch {
             fatalError("不能保存：\(error)")
         }
 
+        locationManager.startUpdatingHeading()
+        locationManager.startUpdatingLocation()
         
-        
+        getRotationValues()
+
     }
-    
-    
     
     
     func findMyLocation() {
@@ -218,9 +198,7 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
         selfLatitude_Double = currentLocation.coordinate.latitude
         selfLongitude_Double = currentLocation.coordinate.longitude
         
-        //locationAltitude.text = altitudeStr
-        //reverseGeocode(location:currentLocation)
-        //locationManager.stopUpdatingLocation()
+        
     }
     
     //将经纬度转换为城市名
@@ -264,6 +242,8 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
                         selfYRotation_Double = self.y
                         selfZRotation_Double = self.z
                         
+                        
+                        
                         var textX = "X: "
                         textX += String(format: "%.4f", rotationValue.x)
                         self.labelX.text = textX
@@ -271,7 +251,7 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
                         textY += String(format: "%.4f", rotationValue.y)
                         self.labelY.text = textY
                         var textZ = "Z: "
-                        textZ += String(format: "%.4f", rotationValue.x)
+                        textZ += String(format: "%.4f", rotationValue.z)
                         self.labelZ.text = textZ
                         //print(self.heading)
                     }

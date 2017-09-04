@@ -168,7 +168,6 @@ class MapUI: UIViewController, MAMapViewDelegate{
         mapView!.userTrackingMode = MAUserTrackingMode.follow
         
         
-        
         let app = UIApplication.shared.delegate as! AppDelegate
         let context = app.persistentContainer.viewContext
         //声明数据的请求
@@ -179,11 +178,6 @@ class MapUI: UIViewController, MAMapViewDelegate{
             
             //遍历查询的结果
             for info in fetchedObjects{
-                print("name=\(String(describing: info.name))")
-                print("content=\(String(describing: info.content))")
-                print("latitude=\(info.latitude)")
-                print("longitude=\(info.longitude)")
-                
                 let pointAnnotation = MAPointAnnotation()
                 pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: info.latitude, longitude: info.longitude)
                 pointAnnotation.title = info.name
@@ -194,6 +188,8 @@ class MapUI: UIViewController, MAMapViewDelegate{
         catch {
             fatalError("不能保存：\(error)")
         }
+        
+        
    
         /*let pointAnnotation = MAPointAnnotation()
         pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: 30.536353, longitude: 114.359372)
@@ -334,7 +330,9 @@ class MapUI: UIViewController, MAMapViewDelegate{
         }else{
             self.textView.becomeFirstResponder()
         }
+    
     }
+    
     
     // 注册通知
     func registNotification(){

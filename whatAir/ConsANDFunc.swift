@@ -13,14 +13,18 @@ import CoreData
 
 //Constant
 public let PI = 3.1415926
-public let SCREENWIDTH = UIScreen.self().bounds.width //屏幕宽度
-public let SCREENHEIGHT = UIScreen.self().bounds.height //屏幕高度
+
+public let SCREENWIDTH = UIScreen.self().bounds.width //屏幕宽度 750
+public let SCREENHEIGHT = UIScreen.self().bounds.height //屏幕高度 1334
 public let VFOV = 61 * PI / 180.0 //垂直视角 弧度
 public let HFOV = 47.6 * PI / 180.0 //水平视角 弧度
 public let NOVP = 3264
 public let NOHP = 2448
 public let NOFLP = 2768
+
 public let USERNAME:String = "孙港"
+
+public let MAXLENGTHSCAN:Double = 500 //最大距离 米
 
 //Variable
 public var selfLatitude_Double:Double = 0 //当前维度 角度
@@ -29,6 +33,10 @@ public var selfXRotation_Double:Double = 0 //0-1
 public var selfYRotation_Double:Double = 0 //0-1
 public var selfZRotation_Double:Double = 0 //0-1
 public var selfDirection_Double:Double = 0 //0-360 角度
+
+var messagesArrayX : [Double] = [Double]()
+var messagesArrayY : [Double] = [Double]()
+
 
 //Function
 public func getHorizonalDistance(selfLocation:CLLocation, messageLocation:CLLocation)->Double{
@@ -80,6 +88,8 @@ public func storeMessage(messageContent:String){
     do {
         try context.save()
         print("保存成功！")
+        print("\(selfLatitude_Double)")
+        print("\(selfLongitude_Double)")
     } catch {
         fatalError("不能保存：\(error)")
     }
