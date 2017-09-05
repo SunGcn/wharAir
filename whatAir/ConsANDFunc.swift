@@ -130,6 +130,70 @@ public func searchMessage(){
         fatalError("不能保存：\(error)")
     }
 }
+
+public func connectServer(){
+   // let client = TCPClient(address: "www.apple.com", port: 80)
+}
+
+public func getMessagesFromServer(){
+    
+    //socket服务端封装类对象
+    //var socketServer:MyTcpSocketServer?
+    //socket客户端类对象
+    var socketClient:TCPClient?
+    
+    //启动服务器
+    //socketServer = MyTcpSocketServer()
+    //socketServer?.start()
+    
+    socketClient=TCPClient(addr: "192.168.1.106", port: 8002)
+    
+    DispatchQueue.global(qos: .background).async {
+        //用于读取并解析服务端发来的消息
+        func readmsg()->[String:Any]?{
+            //read 4 byte int as type
+            if let data=socketClient!.read(4){
+                if data.count==4{
+                    let ndata=NSData(bytes: data, length: data.count)
+                    var len:Int32=0
+                    ndata.getBytes(&len, length: data.count)
+                    if let buff=socketClient!.read(Int(len)){
+                        let msgd = Data(bytes: buff, count: buff.count)
+                        let msgi = (try! JSONSerialization.jsonObject(with: msgd,
+                                                                      options: .mutableContainers)) as! [String:Any]
+                        return msgi
+                    }
+                }
+            }
+            return nil
+        }
+        
+        //连接服务器
+        let (success,msg)=socketClient!.connect(timeout: 10)
+        print(msg)
+        print(success)
+        if success{
+            //不断接收服务器发来的消息
+            while true{
+                if let msg=readmsg(){
+                    DispatchQueue.main.async {
+                        print(msg)
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        //self.disconnect()
+                    }
+                    break
+                }
+            }
+        }else{
+            print("ERROE: Fail to connect server!")
+        }
+    }
+    
+}
+
+
 /*public func getViewContext () -> NSManagedObjectContext {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     return appDelegate.persistentContainer.viewContext

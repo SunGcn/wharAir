@@ -15,6 +15,13 @@
 		3C26C7AF1F2DD4C500234EFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C26C7AE1F2DD4C500234EFD /* Assets.xcassets */; };
 		3C26C7B21F2DD4C500234EFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C26C7B01F2DD4C500234EFD /* LaunchScreen.storyboard */; };
 		3C4F536F1F51470300931E08 /* ConsANDFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4F536E1F51470300931E08 /* ConsANDFunc.swift */; };
+		3C9366621F5EC7BB00197880 /* MyTcpSocketServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93665C1F5EC7BB00197880 /* MyTcpSocketServer.swift */; };
+		3C9366631F5EC7BB00197880 /* ysocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93665D1F5EC7BB00197880 /* ysocket.swift */; };
+		3C9366641F5EC7BB00197880 /* ytcpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C93665E1F5EC7BB00197880 /* ytcpsocket.c */; };
+		3C9366651F5EC7BB00197880 /* ytcpsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C93665F1F5EC7BB00197880 /* ytcpsocket.swift */; };
+		3C9366661F5EC7BB00197880 /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C9366601F5EC7BB00197880 /* yudpsocket.c */; };
+		3C9366671F5EC7BB00197880 /* yudpsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9366611F5EC7BB00197880 /* yudpsocket.swift */; };
+		3C9366691F5ED5C900197880 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 3C9366681F5ED5C900197880 /* Podfile */; };
 		3CB6AAB81F571E8C000091D8 /* whatAir.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3CB6AAB61F571E8C000091D8 /* whatAir.xcdatamodeld */; };
 		3CCCA61A1F49D6A300C876B7 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3CCCA6191F49D6A300C876B7 /* AMap.bundle */; };
 		3CCCA61B1F49D6CC00C876B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD5463A1F49956B00E3B52B /* Foundation.framework */; };
@@ -45,6 +52,13 @@
 		3C26C7B11F2DD4C500234EFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C26C7B31F2DD4C500234EFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C4F536E1F51470300931E08 /* ConsANDFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsANDFunc.swift; sourceTree = "<group>"; };
+		3C93665C1F5EC7BB00197880 /* MyTcpSocketServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTcpSocketServer.swift; sourceTree = "<group>"; };
+		3C93665D1F5EC7BB00197880 /* ysocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ysocket.swift; sourceTree = "<group>"; };
+		3C93665E1F5EC7BB00197880 /* ytcpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ytcpsocket.c; sourceTree = "<group>"; };
+		3C93665F1F5EC7BB00197880 /* ytcpsocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ytcpsocket.swift; sourceTree = "<group>"; };
+		3C9366601F5EC7BB00197880 /* yudpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yudpsocket.c; sourceTree = "<group>"; };
+		3C9366611F5EC7BB00197880 /* yudpsocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = yudpsocket.swift; sourceTree = "<group>"; };
+		3C9366681F5ED5C900197880 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		3CB6AAB71F571E8C000091D8 /* whatAir.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = whatAir.xcdatamodel; sourceTree = "<group>"; };
 		3CCCA6191F49D6A300C876B7 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = whatAir/MAMapKit.framework/AMap.bundle; sourceTree = "<group>"; };
 		3CCCA6211F49D7C100C876B7 /* AMap-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMap-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -119,6 +133,7 @@
 		3C26C7A31F2DD4C500234EFD /* whatAir */ = {
 			isa = PBXGroup;
 			children = (
+				3C93665B1F5EC76600197880 /* ysocket */,
 				3C26C7B31F2DD4C500234EFD /* Info.plist */,
 				3CCCA6221F49D87A00C876B7 /* AMap.swift */,
 				3C26C7A41F2DD4C500234EFD /* AppDelegate.swift */,
@@ -130,8 +145,22 @@
 				3C26C7B01F2DD4C500234EFD /* LaunchScreen.storyboard */,
 				3C26C7A81F2DD4C500234EFD /* Main.storyboard */,
 				3CB6AAB61F571E8C000091D8 /* whatAir.xcdatamodeld */,
+				3C9366681F5ED5C900197880 /* Podfile */,
 			);
 			path = whatAir;
+			sourceTree = "<group>";
+		};
+		3C93665B1F5EC76600197880 /* ysocket */ = {
+			isa = PBXGroup;
+			children = (
+				3C93665C1F5EC7BB00197880 /* MyTcpSocketServer.swift */,
+				3C93665D1F5EC7BB00197880 /* ysocket.swift */,
+				3C93665E1F5EC7BB00197880 /* ytcpsocket.c */,
+				3C93665F1F5EC7BB00197880 /* ytcpsocket.swift */,
+				3C9366601F5EC7BB00197880 /* yudpsocket.c */,
+				3C9366611F5EC7BB00197880 /* yudpsocket.swift */,
+			);
+			name = ysocket;
 			sourceTree = "<group>";
 		};
 		3CD5462B1F49946400E3B52B /* Frameworks */ = {
@@ -223,6 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C9366691F5ED5C900197880 /* Podfile in Resources */,
 				3C26C7B21F2DD4C500234EFD /* LaunchScreen.storyboard in Resources */,
 				3C26C7AF1F2DD4C500234EFD /* Assets.xcassets in Resources */,
 				3CCCA61A1F49D6A300C876B7 /* AMap.bundle in Resources */,
@@ -237,13 +267,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C9366651F5EC7BB00197880 /* ytcpsocket.swift in Sources */,
 				3C0DEDCC1F2DDAA0009C0B58 /* CameraUI.swift in Sources */,
 				3C0DEDCE1F2DDAB1009C0B58 /* MapUI.swift in Sources */,
 				3C26C7A71F2DD4C500234EFD /* ViewController.swift in Sources */,
+				3C9366631F5EC7BB00197880 /* ysocket.swift in Sources */,
+				3C9366641F5EC7BB00197880 /* ytcpsocket.c in Sources */,
 				3CCCA6231F49D87A00C876B7 /* AMap.swift in Sources */,
 				3CB6AAB81F571E8C000091D8 /* whatAir.xcdatamodeld in Sources */,
+				3C9366661F5EC7BB00197880 /* yudpsocket.c in Sources */,
 				3C4F536F1F51470300931E08 /* ConsANDFunc.swift in Sources */,
+				3C9366671F5EC7BB00197880 /* yudpsocket.swift in Sources */,
 				3C26C7A51F2DD4C500234EFD /* AppDelegate.swift in Sources */,
+				3C9366621F5EC7BB00197880 /* MyTcpSocketServer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

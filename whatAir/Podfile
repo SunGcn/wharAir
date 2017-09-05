@@ -1,0 +1,3 @@
+platform :ios, '10.3'
+
+pod 'SwiftSocket', '2.0.2'
