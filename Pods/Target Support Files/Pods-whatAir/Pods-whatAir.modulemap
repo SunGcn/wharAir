@@ -1,0 +1,6 @@
+framework module Pods_whatAir {
+  umbrella header "Pods-whatAir-umbrella.h"
+
+  export *
+  module * { export * }
+}

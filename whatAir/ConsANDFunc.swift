@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import CoreLocation
 import CoreData
+import Alamofire
+import SwiftSocket
 
 //Constant
 public let PI = 3.1415926
@@ -132,10 +134,17 @@ public func searchMessage(){
 }
 
 public func connectServer(){
-   // let client = TCPClient(address: "www.apple.com", port: 80)
+    let client = TCPClient(address: "10.129.196.217", port: 8000)
+    let result1 = client.connect(timeout: 10)
+    let result2 = client.send(string: "hello world")
+    //let result2 = client.recv(1024)
+    
+    print(result1)
+    print(result2)
+    //print(result2)
 }
 
-public func getMessagesFromServer(){
+/*public func getMessagesFromServer(){
     
     //socket服务端封装类对象
     //var socketServer:MyTcpSocketServer?
@@ -191,7 +200,7 @@ public func getMessagesFromServer(){
         }
     }
     
-}
+}*/
 
 
 /*public func getViewContext () -> NSManagedObjectContext {
