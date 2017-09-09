@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.5.0)
+  - Alamofire (4.5.1)
   - SwiftSocket (2.0.2)
 
 DEPENDENCIES:
@@ -7,7 +7,7 @@ DEPENDENCIES:
   - SwiftSocket (~> 2.0.2)
 
 SPEC CHECKSUMS:
-  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   SwiftSocket: 6f4c9c63fbc5c1d61188936bb3c599fd546f40ae
 
 PODFILE CHECKSUM: 1ea337d1e71cbe1b9f236381aae9613dad796cfb

@@ -134,7 +134,7 @@ public func searchMessage(){
 }
 
 public func connectServer(){
-    let client = TCPClient(address: "10.129.196.217", port: 8000)
+    let client = TCPClient(address: "192.168.1.105", port: 8000)
     let result1 = client.connect(timeout: 10)
     let result2 = client.send(string: "hello world")
     //let result2 = client.recv(1024)
