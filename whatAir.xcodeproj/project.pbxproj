@@ -452,12 +452,21 @@
 				INFOPLIST_FILE = whatAir/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"SwiftSocket\"",
+					"-L/usr/local/mysql/lib",
+					"-lmysqlclient",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = sungang.whatAir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AMap-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/** /usr/local/mysql/include";
 			};
 			name = Debug;
 		};
@@ -476,11 +485,20 @@
 				INFOPLIST_FILE = whatAir/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"SwiftSocket\"",
+					"-L/usr/local/mysql/lib",
+					"-lmysqlclient",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = sungang.whatAir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AMap-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/** /usr/local/mysql/include";
 			};
 			name = Release;
 		};

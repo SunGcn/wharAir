@@ -11,6 +11,7 @@
 #define AMap_Bridging_Header_h
 
 #import <MAMapKit/MAMapKit.h>
+#import "mysql.h"
 
 
 #endif /* AMap_Bridging_Header_h */

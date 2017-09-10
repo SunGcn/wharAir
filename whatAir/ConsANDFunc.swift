@@ -144,6 +144,25 @@ public func connectServer(){
     //print(result2)
 }
 
+public func connectSQL(){
+    //var asql:MYSQL!
+    var sql = UnsafeMutablePointer<MYSQL>.allocate(capacity: 1)
+    var resultInit  = mysql_init(sql)
+    
+    if((mysql_real_connect(sql, "localhost", "root", "sungang", "camera", 8001, nil, 0)) != nil)
+    {
+        print("连接失败")
+    }
+    else
+    {
+        print("连接成功")
+    }
+    //mysql_init(mysql)
+    
+    
+    
+}
+
 /*public func getMessagesFromServer(){
     
     //socket服务端封装类对象

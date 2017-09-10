@@ -43,7 +43,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate{
         scrollView.contentSize = CGSize(width: 2 * self.view.frame.width, height: self.view.frame.height)
         
         
-        connectServer()
+        //connectServer()
         //getMessagesFromServer()
                 
         
