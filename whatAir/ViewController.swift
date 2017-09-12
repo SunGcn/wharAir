@@ -45,6 +45,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate{
         
         //connectServer()
         //getMessagesFromServer()
+        connectSQL()
                 
         
     }

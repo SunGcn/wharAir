@@ -39,7 +39,6 @@ public var selfDirection_Double:Double = 0 //0-360 角度
 var messagesArrayX : [Double] = [Double]()
 var messagesArrayY : [Double] = [Double]()
 
-
 //Function
 public func getHorizonalDistance(selfLocation:CLLocation, messageLocation:CLLocation)->Double{
     let tempLocation = CLLocation(latitude: selfLocation.coordinate.latitude, longitude: messageLocation.coordinate.longitude)
@@ -133,7 +132,7 @@ public func searchMessage(){
     }
 }
 
-public func connectServer(){
+/*public func connectServer(){
     let client = TCPClient(address: "192.168.1.105", port: 8000)
     let result1 = client.connect(timeout: 10)
     let result2 = client.send(string: "hello world")
@@ -142,26 +141,25 @@ public func connectServer(){
     print(result1)
     print(result2)
     //print(result2)
-}
+}*/
 
-public func connectSQL(){
+/*public func connectSQL(){
     //var asql:MYSQL!
-    var sql = UnsafeMutablePointer<MYSQL>.allocate(capacity: 1)
-    var resultInit  = mysql_init(sql)
+    let sql = UnsafeMutablePointer<MYSQL>.allocate(capacity: 1)
+    mysql_init(sql)
     
+    //if((mysql_real_connect(sql, "localhost", "root", "sungang", "camera", 8001, nil, 0)) != nil)
     if((mysql_real_connect(sql, "localhost", "root", "sungang", "camera", 8001, nil, 0)) != nil)
-    {
-        print("连接失败")
-    }
-    else
     {
         print("连接成功")
     }
+    else
+    {
+        print("连接失败")
+    }
     //mysql_init(mysql)
     
-    
-    
-}
+}*/
 
 /*public func getMessagesFromServer(){
     
@@ -220,7 +218,6 @@ public func connectSQL(){
     }
     
 }*/
-
 
 /*public func getViewContext () -> NSManagedObjectContext {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
