@@ -291,12 +291,17 @@ class MapUI: UIViewController, MAMapViewDelegate ,AMapLocationManagerDelegate{
         // 动画模式
         let options = UIViewAnimationOptions(rawValue: UInt((userInfo![UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))
         // 偏移量
-        let deltaY = keyBoardBounds.size.height
+        //let deltaY = keyBoardBounds.size.height
         // 动画
         let animations:(() -> Void) = {
-            self.view.transform = CGAffineTransform(translationX: 0,y: -deltaY)
+            //self.view.transform = CGAffineTransform(translationX: 0,y: -deltaY)
             self.textView.text = ""
             self.textView.textColor = UIColor.black
+            let h = self.textView.frame.height
+            let w = self.sendButton.frame.origin.x
+            self.textView.frame = CGRect(x: 10, y: 345, width: self.view.frame.width - 20 - 60 - 10,height: h)
+            //self.sendButton.frame = CGRect(x: SCREENWIDTH - self.textView.frame.width - 10 - 10, y: 340, width: 60,height: h)
+            self.sendButton.frame = CGRect(x: w, y: 345, width: 60, height: 36)
         }
         // 判断是否需要动画
         if duration > 0 {
@@ -315,11 +320,12 @@ class MapUI: UIViewController, MAMapViewDelegate ,AMapLocationManagerDelegate{
         
         let duration = (userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         let animations:(() -> Void) = {
-            self.view.transform = CGAffineTransform.identity
+            //self.view.transform = CGAffineTransform.identity
             
             self.textView.frame = CGRect(x: 10, y:self.view.frame.height - self.textViewHeight - 10, width: self.view.frame.width - 20 - 60 - 10,height: self.textViewHeight)
             //self.backgroundView.frame = CGRect(x: 10,y: self.view.frame.height - 40,width: self.textViewW+2,height: 32)
-            
+            let w = self.textView.frame.width
+            self.sendButton.frame = CGRect(x: 20 + w, y:self.view.frame.height - self.textViewHeight - 10 , width: 60, height: 36)
             self.textView.textColor = UIColor.lightGray
             
         }
