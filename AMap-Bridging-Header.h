@@ -12,6 +12,7 @@
 
 #import <MAMapKit/MAMapKit.h>
 #import "mysql.h"
-
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
 
 #endif /* AMap_Bridging_Header_h */

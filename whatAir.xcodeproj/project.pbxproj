@@ -24,7 +24,6 @@
 		3CCCA61F1F49D6FA00C876B7 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD546501F4995EF00E3B52B /* libc++.tbd */; };
 		3CCCA6201F49D70700C876B7 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD5464E1F4995E000E3B52B /* libstdc++.6.0.9.tbd */; };
 		3CCCA6231F49D87A00C876B7 /* AMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCCA6221F49D87A00C876B7 /* AMap.swift */; };
-		3CCCA6241F49DE2500C876B7 /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD546561F499C4D00E3B52B /* AMapFoundationKit.framework */; };
 		3CCCA6251F49DE3500C876B7 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD546581F499C5D00E3B52B /* AMapSearchKit.framework */; };
 		3CCCA6261F49DEF600C876B7 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD546341F49954400E3B52B /* GLKit.framework */; };
 		3CCCA6271F49DF0000C876B7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD546361F49955700E3B52B /* OpenGLES.framework */; };
@@ -32,6 +31,8 @@
 		3CD5465B1F499C6D00E3B52B /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD5465A1F499C6D00E3B52B /* MAMapKit.framework */; };
 		3CD5465F1F49A49D00E3B52B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD546481F4995BA00E3B52B /* AdSupport.framework */; };
 		3CD546601F49A4A600E3B52B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD546461F4995AE00E3B52B /* Security.framework */; };
+		3CFF79661F68428A00D7754D /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD546561F499C4D00E3B52B /* AMapFoundationKit.framework */; };
+		3CFF79681F68428A00D7754D /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFF79671F68428A00D7754D /* AMapLocationKit.framework */; };
 		84DBA810B2E102E1A0A64C1E /* Pods_whatAir.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C4ACAFF862BE6E1F74CE1C /* Pods_whatAir.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,8 @@
 		3CD546561F499C4D00E3B52B /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapFoundationKit.framework; path = whatAir/AMapFoundationKit.framework; sourceTree = "<group>"; };
 		3CD546581F499C5D00E3B52B /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = whatAir/AMapSearchKit.framework; sourceTree = "<group>"; };
 		3CD5465A1F499C6D00E3B52B /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = whatAir/MAMapKit.framework; sourceTree = "<group>"; };
+		3CFF79641F6841CC00D7754D /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapLocationKit.framework; path = ../../../Downloads/AMapLocationKit.framework; sourceTree = "<group>"; };
+		3CFF79671F68428A00D7754D /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapLocationKit.framework; path = whatAir/AMapLocationKit.framework; sourceTree = "<group>"; };
 		46C4ACAFF862BE6E1F74CE1C /* Pods_whatAir.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_whatAir.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		680223402B468F9A8AB24C84 /* Pods-whatAir.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatAir.release.xcconfig"; path = "Pods/Target Support Files/Pods-whatAir/Pods-whatAir.release.xcconfig"; sourceTree = "<group>"; };
 		EE0241B18A6D0FBB17C177FE /* Pods-whatAir.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatAir.debug.xcconfig"; path = "Pods/Target Support Files/Pods-whatAir/Pods-whatAir.debug.xcconfig"; sourceTree = "<group>"; };
@@ -81,11 +84,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CFF79681F68428A00D7754D /* AMapLocationKit.framework in Frameworks */,
+				3CFF79661F68428A00D7754D /* AMapFoundationKit.framework in Frameworks */,
 				3CCCA6281F49DF0800C876B7 /* UIKit.framework in Frameworks */,
 				3CCCA6271F49DF0000C876B7 /* OpenGLES.framework in Frameworks */,
 				3CCCA6261F49DEF600C876B7 /* GLKit.framework in Frameworks */,
 				3CCCA6251F49DE3500C876B7 /* AMapSearchKit.framework in Frameworks */,
-				3CCCA6241F49DE2500C876B7 /* AMapFoundationKit.framework in Frameworks */,
 				3CCCA6201F49D70700C876B7 /* libstdc++.6.0.9.tbd in Frameworks */,
 				3CCCA61F1F49D6FA00C876B7 /* libc++.tbd in Frameworks */,
 				3CCCA61E1F49D6EF00C876B7 /* libz.tbd in Frameworks */,
@@ -152,6 +156,8 @@
 		3CD5462B1F49946400E3B52B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3CFF79671F68428A00D7754D /* AMapLocationKit.framework */,
+				3CFF79641F6841CC00D7754D /* AMapLocationKit.framework */,
 				3CD5465A1F499C6D00E3B52B /* MAMapKit.framework */,
 				3CD546581F499C5D00E3B52B /* AMapSearchKit.framework */,
 				3CD546561F499C4D00E3B52B /* AMapFoundationKit.framework */,

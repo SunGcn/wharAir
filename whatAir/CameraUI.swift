@@ -195,8 +195,8 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
         
         locationLabel.text = locationStr
         
-        selfLatitude_Double = currentLocation.coordinate.latitude
-        selfLongitude_Double = currentLocation.coordinate.longitude
+        //selfLatitude_Double = currentLocation.coordinate.latitude
+        //selfLongitude_Double = currentLocation.coordinate.longitude
         
         
     }
