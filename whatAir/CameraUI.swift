@@ -11,8 +11,9 @@ import UIKit
 import CoreLocation
 import CoreMotion
 import CoreData
+import QuartzCore
 
-class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManagerDelegate{
+class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManagerDelegate, CAAnimationDelegate{
     var imageView: UIImageView!
     
     var captureSesssion: AVCaptureSession!
@@ -45,8 +46,10 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
 
     
     
+    var messageButton:UIButton!
     
-    
+    var lastAngle = 3.1416 / 2
+    var lastPoint = CGPoint(x: 100,y: 100)
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,13 +72,13 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
         textview.layer.borderColor = UIColor.red.cgColor //.gray.cgColor //边框颜色
         self.view.addSubview(textview)*/
         
-        let captureBtn = UIButton()
+        /*let captureBtn = UIButton()
         captureBtn.frame.size = CGSize(width: 48, height: 48)
         captureBtn.center.x = self.view.center.x
         captureBtn.frame.origin.y = self.view.frame.height - 100
         captureBtn.setImage(UIImage(named:"takephoto"), for: UIControlState.normal)
         captureBtn.addTarget(self, action: #selector(takePhoto), for: UIControlEvents.touchUpInside)
-        self.view.addSubview(captureBtn)
+        self.view.addSubview(captureBtn)*/
         
         let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         do {
@@ -168,6 +171,68 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
         locationManager.startUpdatingLocation()
         
         getRotationValues()
+        
+        
+        
+        //添加按钮
+        messageButton = UIButton(type: UIButtonType.system)
+        messageButton.setTitle("hello world 这是第一条消息", for: UIControlState())
+        messageButton.layer.cornerRadius = 8
+        messageButton.frame = CGRect(x: 100, y: 100, width: 200, height: 36)
+        //sendButton.setImage(UIImage(named:"button"), for: UIControlState.normal)
+        messageButton.backgroundColor = UIColor.init(colorLiteralRed: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 0.75)
+        messageButton.tintColor = UIColor.init(colorLiteralRed: 59/255.0, green: 151/255.0, blue: 247/255.0, alpha: 0.75)
+        //messageButton.addTarget(self, action: #selector(MapUI.sendAction), for: UIControlEvents.touchUpInside)
+        self.view.addSubview(messageButton)
+        
+        
+        //rotationButton(button: messageButton,angle: Double(CGFloat.pi / 2.0))
+        //rotationButton(button: messageButton,angle: Double(CGFloat.pi / 2.0))
+        addButton(currentView: self.view, locationX: 200, locationY: 400)
+        
+        
+    }
+    
+    func addButton(currentView:UIView, locationX:Int, locationY:Int)
+    {
+        var messageButton:UIButton!
+        
+        messageButton = UIButton(type: UIButtonType.system)
+        messageButton.setTitle("hello world 这是第一条消息", for: UIControlState())
+        messageButton.layer.cornerRadius = 8
+        messageButton.frame = CGRect(x: locationX, y: locationY, width: 200, height: 36)
+        //sendButton.setImage(UIImage(named:"button"), for: UIControlState.normal)
+        messageButton.backgroundColor = UIColor.init(colorLiteralRed: 59/255.0, green: 151/255.0, blue: 247/255.0, alpha: 0.75)
+        messageButton.tintColor = UIColor.init(colorLiteralRed: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 0.75)
+        
+
+        currentView.addSubview(messageButton)
+    }
+    
+    
+    func rotationButton(button:UIButton, angle:Double, point:CGPoint)
+    {
+        //控制按钮旋转
+        let fullRotation = CABasicAnimation(keyPath: "transform.rotation")
+        fullRotation.delegate = self
+        fullRotation.fromValue = NSNumber(floatLiteral: lastAngle)
+        fullRotation.toValue = NSNumber(floatLiteral: angle) // Double(CGFloat.pi / 2.0)
+        
+        
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.fromValue = NSValue(cgPoint: lastPoint)
+        animation.toValue = NSValue(cgPoint: point)
+        
+    
+        
+        let groupAnimation = CAAnimationGroup()
+        groupAnimation.beginTime = CACurrentMediaTime() + 0.5
+        groupAnimation.duration = 0.1
+        groupAnimation.isRemovedOnCompletion = false
+        groupAnimation.fillMode = kCAFillModeBackwards
+        groupAnimation.animations = [fullRotation,animation]
+        
+        button.layer.add(groupAnimation ,forKey: "")
 
     }
     
@@ -242,7 +307,38 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
                         selfYRotation_Double = self.y
                         selfZRotation_Double = self.z
                         
+                        //let rotationAngle = 0.5//Double(CGFloat.pi / 2.0) //+ Double(self.y * 90.0) * Double(CGFloat.pi / 180.0)
+                        //self.rotationButton(button: self.messageButton, angle: rotationAngle)
+            
+                        //let rotationAngle1:CGFloat = CGFloat.pi / 2
+                        //let aa = self.y / 2
+                        //let rotationAngle2:CGFloat = CGFloat.pi /
+                        //let rotationAngle = rotationAngle1 + rotationAngle2
+                        //let pi:Double = 3.1416
                         
+                        //let angle:Double = pi / 2.0 + pi * rotationValue.y / 2.0
+                        //self.messageButton.transform = CGAffineTransform(rotationAngle: CGFloat(angle))
+                        let currentAngle = 3.1416 / 2 + asin(rotationValue.y)
+                        let currentPoint = CGPoint(x: self.lastPoint.x + CGFloat(abs(abs(rotationValue.x) - 1)),y: self.lastPoint.y)
+                        self.rotationButton(button: self.messageButton, angle: currentAngle )
+                        self.lastAngle = currentAngle
+                        //self.messageButton.transform = CGAffineTransform.init(translationX: 1, y: 1)
+                        //self.messageButton.frame.origin.x = 250
+                        
+                        /*let buttonX = self.messageButton.frame.origin.x
+                        print(self.messageButton.frame.origin.x)
+                        print(self.messageButton.frame.origin.y)
+                        let buttonY = self.messageButton.frame.origin.y
+                        if(rotationValue.z < 0)
+                        {
+                           // buttonX = buttonX + CGFloat(abs(rotationValue.x - 1) * 30)
+                        }
+                        else
+                        {
+                            //buttonX = self.messageButton.frame.origin.x
+                        }
+                        self.messageButton.frame = CGRect(x: buttonX, y: buttonY, width: 200, height: 36)*/
+
                         
                         var textX = "X: "
                         textX += String(format: "%.4f", rotationValue.x)
