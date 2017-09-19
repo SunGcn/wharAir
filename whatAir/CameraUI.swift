@@ -319,9 +319,16 @@ class CameraUI: UIViewController,AVCapturePhotoCaptureDelegate ,CLLocationManage
                         //let angle:Double = pi / 2.0 + pi * rotationValue.y / 2.0
                         //self.messageButton.transform = CGAffineTransform(rotationAngle: CGFloat(angle))
                         let currentAngle = 3.1416 / 2 + asin(rotationValue.y)
-                        let currentPoint = CGPoint(x: self.lastPoint.x + CGFloat(abs(abs(rotationValue.x) - 1)),y: self.lastPoint.y)
-                        self.rotationButton(button: self.messageButton, angle: currentAngle )
+                        var currentPoint = self.lastPoint
+                        if(rotationValue.z < 0){
+                            currentPoint = CGPoint(x: self.lastPoint.x + CGFloat(asin(abs(abs(rotationValue.x) - 1)) * 60),y: self.lastPoint.y)
+                        }
+                        else{
+                            currentPoint = CGPoint(x: self.lastPoint.x - CGFloat(asin(abs(abs(rotationValue.x) - 1)) * 60),y: self.lastPoint.y)
+                        }
+                        self.rotationButton(button: self.messageButton, angle: currentAngle, point:currentPoint)
                         self.lastAngle = currentAngle
+                        self.lastPoint = currentPoint
                         //self.messageButton.transform = CGAffineTransform.init(translationX: 1, y: 1)
                         //self.messageButton.frame.origin.x = 250
                         
